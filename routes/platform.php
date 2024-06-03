@@ -19,7 +19,7 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-
+use App\Orchid\Screens\ClientListScreen;
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -90,6 +90,9 @@ Route::screen('example', ExampleScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push('Example Screen'));
+
+Route::screen('clients', ClientListScreen::class)
+    ->name('platform.client.list');
 
 Route::screen('/examples/form/fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 Route::screen('/examples/form/advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');

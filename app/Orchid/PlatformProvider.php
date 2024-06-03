@@ -9,28 +9,25 @@ use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
+use Orchid\Support\Facades\Dashboard as OrchidDashboard;
+use Orchid\Support\ItemMenu;
 
 class PlatformProvider extends OrchidServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @param Dashboard $dashboard
-     *
-     * @return void
-     */
+
     public function boot(Dashboard $dashboard): void
     {
-        parent::boot($dashboard);
+        $this->registerPermissions($dashboard);
 
-        // ...
+        Menu::make()
+        ->slug('main')
+        ->icon('user')
+        ->title('Clients')
+        ->route('platform.client.list')
+        ->divider();
     }
 
-    /**
-     * Register the application menu.
-     *
-     * @return Menu[]
-     */
+
     public function menu(): array
     {
         return [
@@ -92,17 +89,6 @@ class PlatformProvider extends OrchidServiceProvider
         ];
     }
 
-    /**
-     * Register permissions for the application.
-     *
-     * @return ItemPermission[]
-     */
-    public function permissions(): array
-    {
-        return [
-            ItemPermission::group(__('System'))
-                ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
-        ];
-    }
+
+
 }
